@@ -1,6 +1,6 @@
 import React from "react";
 import { Formik, Form } from "formik";
-import { Button, Box, useToast } from "@chakra-ui/react";
+import { Button, Box } from "@chakra-ui/react";
 import Wrapper from "../components/Wrapper";
 import InputField from "../components/InputField";
 import { useMutation } from "urql";
