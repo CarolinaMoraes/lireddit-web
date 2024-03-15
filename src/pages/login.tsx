@@ -11,6 +11,8 @@ import {
 } from "../gql/graphql";
 import { handleRequestErrors } from "../utils/handleRequestErrors";
 import { useRouter } from "next/router";
+import { createUrqlClient } from "../utils/createUrqlClient";
+import { withUrqlClient } from "next-urql";
 
 const Login: React.FC<{}> = ({}) => {
   const router = useRouter();
@@ -64,4 +66,4 @@ const Login: React.FC<{}> = ({}) => {
   );
 };
 
-export default Login;
+export default withUrqlClient(createUrqlClient)(Login);
