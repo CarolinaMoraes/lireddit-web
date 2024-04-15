@@ -21,26 +21,39 @@ const Login: React.FC<{}> = ({}) => {
     LoginMutationVariables
   >(LoginDocument);
 
+  const checkErrorResponseAndSetErrors = (errorResponse, setErrors) => {
+    if(!errorResponse) return;
+
+    // checks if the error response is validating username or email, if it is:
+    // change the property name to usernameOrEmail to bind the errors correctly to the InputField
+    if ("username" in errorResponse || "email" in errorResponse) {
+      errorResponse.usernameOrEmail =
+        errorResponse.username || errorResponse.email;
+    }
+    setErrors(errorResponse);
+  };
+
   return (
     <Wrapper variant="small">
       <Formik
-        initialValues={{ username: "", password: "" }}
+        initialValues={{ usernameOrEmail: "", password: "" }}
         onSubmit={async (values, { setErrors }) => {
           const response = await login(values);
 
-          if (response.data?.login) router.push("/");
-          else {
+          if (response.data?.login) {
+            router.push("/");
+          } else {
             const errorResponse = handleRequestErrors(response.error);
-            if (errorResponse) setErrors(errorResponse);
+            checkErrorResponseAndSetErrors(errorResponse, setErrors);
           }
         }}
       >
         {({ isSubmitting }) => (
           <Form>
             <InputField
-              name="username"
-              placeholder="username"
-              label="Username"
+              name="usernameOrEmail"
+              placeholder="username or email"
+              label="Username or email"
               type="text"
             />
             <Box mt={4}>

@@ -25,7 +25,7 @@ const mutationUpdates = {
       { query: MeDocument },
       _result,
       (result, query) => {
-        if (_info.error === "undefined") {
+        if (_info.error) {
           return query;
         }
 
@@ -45,7 +45,7 @@ const mutationUpdates = {
       { query: MeDocument },
       _result,
       (result, query) => {
-        if (_info.error !== "undefined") {
+        if (_info.error) {
           return query;
         }
 
