@@ -1,6 +1,7 @@
 import React from "react";
 import { Formik, Form } from "formik";
-import { Button, Box } from "@chakra-ui/react";
+import { Button, Box, Link, Flex } from "@chakra-ui/react";
+import NextLink from "next/link";
 import Wrapper from "../components/Wrapper";
 import InputField from "../components/InputField";
 import { useMutation } from "urql";
@@ -22,7 +23,7 @@ const Login: React.FC<{}> = ({}) => {
   >(LoginDocument);
 
   const checkErrorResponseAndSetErrors = (errorResponse, setErrors) => {
-    if(!errorResponse) return;
+    if (!errorResponse) return;
 
     // checks if the error response is validating username or email, if it is:
     // change the property name to usernameOrEmail to bind the errors correctly to the InputField
@@ -63,6 +64,11 @@ const Login: React.FC<{}> = ({}) => {
                 label="Password"
                 type="password"
               />
+              <Box mt={2}>
+                <Link color="blue.600" as={NextLink} href="/forgot-password">
+                  Forgot your password?
+                </Link>
+              </Box>
             </Box>
             <Button
               type="submit"
