@@ -61,7 +61,7 @@ const Navbar: React.FC<NavbarProps> = ({}) => {
   }
 
   return (
-    <Flex p={6} bg="green.500">
+    <Flex zIndex={1} position="sticky" top={0} p={6} bg="green.500">
       <Box color="white" ml={"auto"}>
         {body}
       </Box>

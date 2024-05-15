@@ -1,13 +1,15 @@
-import React from "react";
-import Navbar from "../components/Navbar";
+import { Link } from "@chakra-ui/react";
 import { withUrqlClient } from "next-urql";
-import { createUrqlClient } from "../utils/createUrqlClient";
+import NextLink from "next/link";
+import React from "react";
 import { useQuery } from "urql";
+import Layout from "../components/Layout";
 import {
   GetPostsDocument,
   GetPostsQuery,
   GetPostsQueryVariables,
 } from "../gql/graphql";
+import { createUrqlClient } from "../utils/createUrqlClient";
 
 interface IndexProps {}
 
@@ -18,17 +20,16 @@ const Index: React.FC<IndexProps> = ({}) => {
   >({ query: GetPostsDocument });
 
   return (
-    <>
-      <Navbar />
-      <h1>Hello World</h1>
+    <Layout>
+      <Link as={NextLink} href="/create-post">Create post</Link>
       <br />
       <ul>
         {data?.getPosts.map((post) => (
           <li key={post?.id}>{post?.title}</li>
         ))}
       </ul>
-    </>
+    </Layout>
   );
 };
 
-export default withUrqlClient(createUrqlClient, { ssr: true })(Index);
+export default withUrqlClient(createUrqlClient)(Index);

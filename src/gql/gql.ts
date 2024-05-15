@@ -15,6 +15,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
 const documents = {
     "fragment SimpleUser on User {\n  id\n  username\n}": types.SimpleUserFragmentDoc,
     "mutation ChangePassword($token: String!, $newPassword: String!) {\n  changePassword(token: $token, newPassword: $newPassword) {\n    ...SimpleUser\n  }\n}": types.ChangePasswordDocument,
+    "mutation CreatePost($postInput: PostInput) {\n  createPost(postInput: $postInput) {\n    id\n    text\n    author {\n      id\n      username\n    }\n    updatedAt\n  }\n}": types.CreatePostDocument,
     "mutation ForgotPassword($email: String!) {\n  forgotPassword(email: $email)\n}": types.ForgotPasswordDocument,
     "mutation Login($usernameOrEmail: String!, $password: String!) {\n  login(userInput: {usernameOrEmail: $usernameOrEmail, password: $password}) {\n    ...SimpleUser\n  }\n}": types.LoginDocument,
     "mutation Logout {\n  logout\n}": types.LogoutDocument,
@@ -45,6 +46,10 @@ export function graphql(source: "fragment SimpleUser on User {\n  id\n  username
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "mutation ChangePassword($token: String!, $newPassword: String!) {\n  changePassword(token: $token, newPassword: $newPassword) {\n    ...SimpleUser\n  }\n}"): (typeof documents)["mutation ChangePassword($token: String!, $newPassword: String!) {\n  changePassword(token: $token, newPassword: $newPassword) {\n    ...SimpleUser\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "mutation CreatePost($postInput: PostInput) {\n  createPost(postInput: $postInput) {\n    id\n    text\n    author {\n      id\n      username\n    }\n    updatedAt\n  }\n}"): (typeof documents)["mutation CreatePost($postInput: PostInput) {\n  createPost(postInput: $postInput) {\n    id\n    text\n    author {\n      id\n      username\n    }\n    updatedAt\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
